@@ -1,0 +1,37 @@
+---
+execution:
+- concurrency: 100
+  throughput: 5
+  steps: 5
+  ramp-up: 10m
+  hold-for: 1h
+  scenario: random-query
+
+scenarios:
+  random-query:
+    think-time: 0.75
+    requests:
+    - url: http://testmantle.surrey.ca/lambo/tickets?license=P98765&region=bc
+      method: GET
+    - url: http://testmantle.surrey.ca/lambo/tickets/BN000053
+      method: GET
+    - url: http://testmantle.surrey.ca/lambo/makes
+      method: GET
+
+  list-tickets-by-license:
+    think-time: 0.75
+    requests:
+    - url: http://testmantle.surrey.ca/lambo/tickets?license=P98765&region=bc
+      method: GET
+
+  find-ticket-by-id:
+    think-time: 0.75
+    requests:
+    - url: http://testmantle.surrey.ca/lambo/tickets/BN000053
+      method: GET
+
+  list-makes:
+    think-time: 0.75
+    requests:
+    - url: http://testmantle.surrey.ca/lambo/makes
+      method: GET
